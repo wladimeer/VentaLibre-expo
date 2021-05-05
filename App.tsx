@@ -15,14 +15,26 @@ function AuthScreen() {
   );
 }
 
-function App() {
+const App = function () {
+  const DarkTheme = {
+    dark: true,
+    colors: {
+      text: '#FFFFFF',
+      primary: '#231E1E',
+      notification: '#231E1E',
+      background: '#231E1E',
+      border: '#231E1E',
+      card: '#231E1E'
+    }
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="AuthScreen" component={AuthScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default App;

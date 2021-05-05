@@ -4,11 +4,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
 import * as React from 'react';
 
-function SignInScreen(props: any) {
+const SignInScreen = function (props: any) {
   const [loadedFonts] = useFonts({
     Quicksand: require('../../assets/font/Quicksand-Regular.ttf'),
     GreatVibes: require('../../assets/font/GreatVibes-Regular.ttf')
   });
+
+  const [value, setValue] = React.useState({ email: '', password: '' });
+
+  const setText = function (name: string, value: any) {
+    setValue({ ...value, [name]: value });
+  };
 
   if (!loadedFonts) {
     return null;
@@ -22,14 +28,22 @@ function SignInScreen(props: any) {
 
       <View style={styles.inputGroup}>
         <Text style={styles.label}>Correo</Text>
-        <TextInput style={styles.input} selectionColor={'#2980B9'}></TextInput>
+        <TextInput
+          style={styles.input}
+          onChangeText={(value) => setText('email', value)}
+          selectionColor={'#2980B9'}
+        />
       </View>
 
       <View style={styles.separator} />
 
       <View style={styles.inputGroup}>
         <Text style={styles.label}>Contraseña</Text>
-        <TextInput style={styles.input} selectionColor={'#2980B9'}></TextInput>
+        <TextInput
+          style={styles.input}
+          onChangeText={(value) => setText('password', value)}
+          selectionColor={'#2980B9'}
+        />
       </View>
 
       <View style={styles.separator} />
@@ -57,7 +71,7 @@ function SignInScreen(props: any) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -112,7 +126,8 @@ const styles = StyleSheet.create({
     color: '#CCD1D1',
     fontFamily: 'Quicksand',
     textAlign: 'center',
-    marginTop: 20
+    marginTop: 10,
+    padding: 10
   },
   separator: {
     height: 40
